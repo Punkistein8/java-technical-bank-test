@@ -1,0 +1,75 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - internal_bank_network
+
+  kafka:
+    image: confluentinc/cp-kafka:6.2.0
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - internal_bank_network
+
+  bank_db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: banco_db
+      POSTGRES_USER: bank
+      POSTGRES_PASSWORD: SAUL123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal_bank_network
+
+  ms-gestion-cuentas-movimientos:
+    build:
+      context: .
+      dockerfile: ms-gestion-cuentas-movimientos/Dockerfile
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    ports:
+      - "8081:8081"
+    depends_on:
+      - bank_db
+      - kafka
+    networks:
+      - internal_bank_network
+
+  ms-gestion-personas-clientes:
+    build:
+      context: .
+      dockerfile: ms-gestion-personas-clientes/Dockerfile
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    ports:
+      - "8080:8080"
+    depends_on:
+      - bank_db
+      - kafka
+    networks:
+      - internal_bank_network
+
+volumes:
+  postgres_data:
+
+networks:
+  internal_bank_network:
+    driver: bridge

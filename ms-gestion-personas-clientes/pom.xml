@@ -3,29 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>hguerrero</groupId>
+        <artifactId>java-technical-banking-test</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+<!--        <relativePath>../pom.xml</relativePath>-->
     </parent>
-    <groupId>jhair.vasquez</groupId>
+    <groupId>hguerrero</groupId>
     <artifactId>ms-gestion-personas-clientes</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ms-core-persona-cliente</name>
     <description>ms-core-persona-cliente</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -72,11 +59,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>1.18.32</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -84,6 +75,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.3</version>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -92,6 +84,13 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
