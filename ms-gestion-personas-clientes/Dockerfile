@@ -1,12 +1,19 @@
-# Etapa 1: Construir la aplicación
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
-WORKDIR /app
-COPY . .
-RUN mvn clean package spring-boot:repackage -DskipTests -pl ms-gestion-personas-clientes -am
+# Etapa 1: Build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+WORKDIR /build
 
-# Etapa 2: Crear la imagen final
+# Copiar todo el proyecto (nivel raíz del multi-módulo)
+COPY ../.. .
+
+# Construir solo el módulo deseado y sus dependencias
+RUN mvn clean package -pl ms-gestion-personas-clientes -am -DskipTests
+
+# Etapa 2: Imagen final
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
-COPY --from=builder /app/ms-gestion-personas-clientes/target/*.jar app.jar
-EXPOSE 8080
+
+# Copiar el jar reempaquetado
+COPY --from=build /build/ms-gestion-personas-clientes/target/ms-gestion-personas-clientes-*.jar app.jar
+
+EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "app.jar"]
