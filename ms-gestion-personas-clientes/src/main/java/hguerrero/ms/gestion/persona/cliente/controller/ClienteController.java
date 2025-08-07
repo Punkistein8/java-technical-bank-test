@@ -26,7 +26,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public GenericResponse<Cliente> findById(@PathVariable Long id) throws RecordNotFoundException {
+    public GenericResponse<Cliente> findById(@PathVariable("id") Long id) throws RecordNotFoundException {
         return clienteService.findById(id);
     }
 
@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         clienteService.delete(id);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CuentaController {
     @GetMapping("/{numCuenta}")
-    ResponseEntity<Cuenta> getCuentaByNumCuenta(@PathVariable String numCuenta);
+    ResponseEntity<Cuenta> getCuentaByNumCuenta(@PathVariable("numCuenta") String numCuenta);
 
     @GetMapping
     ResponseEntity<List<Cuenta>> getAllCuentas();
@@ -17,5 +17,5 @@ public interface CuentaController {
     ResponseEntity<Cuenta> createCuenta(@RequestBody Cuenta cuenta);
 
     @DeleteMapping("/{numCuenta}")
-    ResponseEntity<Void> deleteCuenta(@PathVariable String numCuenta);
+    ResponseEntity<Void> deleteCuenta(@PathVariable("numCuenta") String numCuenta);
 }

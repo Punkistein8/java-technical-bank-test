@@ -16,7 +16,7 @@ public class CuentaController {
     private final CuentaService cuentaService;
 
     @GetMapping("/{numCuenta}")
-    public ResponseEntity<Cuenta> getCuentaByNumCuenta(@PathVariable String numCuenta) throws RecordNotFound {
+    public ResponseEntity<Cuenta> getCuentaByNumCuenta(@PathVariable("numCuenta") String numCuenta) throws RecordNotFound {
         Cuenta cuenta = cuentaService.findByNumCuenta(numCuenta);
         return ResponseEntity.ok(cuenta);
     }

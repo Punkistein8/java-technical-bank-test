@@ -35,7 +35,7 @@ public class MovimientoController {
 
     // Obtener movimientos por número de cuenta
     @GetMapping("/cuenta/{numCuenta}")
-    public ResponseEntity<GenericResponse<List<Movimiento>>> findByCuentaNum(@PathVariable String numCuenta) {
+    public ResponseEntity<GenericResponse<List<Movimiento>>> findByCuentaNum(@PathVariable("numCuenta") String numCuenta) {
         List<Movimiento> movimientos = movimientosService.findMovimientoByCuentaNum(numCuenta);
         return ResponseEntity.ok(
                 GenericResponse.<List<Movimiento>>builder()
@@ -48,7 +48,7 @@ public class MovimientoController {
 
     // Obtener un movimiento por ID
     @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse<Movimiento>> findById(@PathVariable Long id) throws RecordNotFound {
+    public ResponseEntity<GenericResponse<Movimiento>> findById(@PathVariable("id") Long id) throws RecordNotFound {
         Movimiento movimiento = movimientosService.findById(id);
         return ResponseEntity.ok(
                 GenericResponse.<Movimiento>builder()
