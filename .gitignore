@@ -1,0 +1,69 @@
+# Microservicios
+# Ignorar archivos y directorios generados dentro de cada microservicio
+ms-gestion-cuentas-movimientos/HELP.md
+ms-gestion-cuentas-movimientos/src/main/target/
+ms-gestion-cuentas-movimientos/src/test/target/
+ms-gestion-cuentas-movimientos/target/
+ms-gestion-cuentas-movimientos/.mvn/
+
+ms-gestion-personas-clientes/HELP.md
+ms-gestion-personas-clientes/src/main/target/
+ms-gestion-personas-clientes/src/test/target/
+ms-gestion-personas-clientes/target/
+ms-gestion-personas-clientes/.mvn/
+
+dep-bank-core/HELP.md
+dep-bank-core/src/main/target/
+dep-bank-core/src/test/target/
+dep-bank-core/target/
+dep-bank-core/.mvn/
+
+# Excepciones: incluir Maven Wrapper para cada microservicio
+!ms-gestion-cuentas-movimientos/.mvn/wrapper/maven-wrapper.jar
+!ms-gestion-cuentas-movimientos/.mvn/wrapper/maven-wrapper.properties
+!ms-gestion-personas-clientes/.mvn/wrapper/maven-wrapper.jar
+!ms-gestion-personas-clientes/.mvn/wrapper/maven-wrapper.properties
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+ms-gestion-cuentas-movimientos/.idea/
+ms-gestion-cuentas-movimientos/*.iws
+ms-gestion-cuentas-movimientos/*.iml
+ms-gestion-cuentas-movimientos/*.ipr
+
+ms-gestion-personas-clientes/.idea/
+ms-gestion-personas-clientes/*.iws
+ms-gestion-personas-clientes/*.iml
+ms-gestion-personas-clientes/*.ipr
+
+dep-bank-core/.idea/
+dep-bank-core/*.iws
+dep-bank-core/*.iml
+dep-bank-core/*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+.gitattributes
