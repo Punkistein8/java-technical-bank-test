@@ -32,7 +32,12 @@ public class ReportesController {
             @RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
             @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
             @RequestParam("tipoReporte") String tipoReporte) throws RecordNotFound {
-        ReporteDTO reporte = reportesService.generateReport(clienteId, fechaInicio, fechaFin, tipoReporte);
+
+        // Parseo de Date a LocalDateTime
+        java.time.LocalDateTime inicio = fechaInicio.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+        java.time.LocalDateTime fin = fechaFin.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+        
+        ReporteDTO reporte = reportesService.generateReport(clienteId, inicio, fin, tipoReporte);
         return ResponseEntity.ok(
                 GenericResponse.<ReporteDTO>builder()
                         .status(HttpStatusCode.valueOf(HttpStatus.OK.value()))

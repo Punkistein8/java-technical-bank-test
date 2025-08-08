@@ -12,6 +12,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -21,7 +22,7 @@ public class ReportesServiceImpl implements ReportesService{
     private final BeanFactory beanFactory;
 
     @Override
-    public ReporteDTO generateReport(Long clienteId, Date fechaInicio, Date fechaFin, String tipoReporte) throws RecordNotFound {
+    public ReporteDTO generateReport(Long clienteId, LocalDateTime fechaInicio, LocalDateTime fechaFin, String tipoReporte) throws RecordNotFound {
         if (!beanFactory.containsBean(tipoReporte)) {
             log.error("Tipo de reporte no válido: {}", tipoReporte);
             throw new InvalidStrategyException("El tipo de reporte '" + tipoReporte + "' no es válido o no está registrado");
